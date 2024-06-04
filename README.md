@@ -46,8 +46,8 @@ jobs:
   publish-wiki:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: Andrew-Chen-Wang/github-wiki-action@v4
+      - uses: actions/checkout@v4
+      - uses: linuxgoose/github-wiki-action@v1
 ```
 
 ☝ This workflow will mirror the `wiki/` folder in your GitHub repository to the
