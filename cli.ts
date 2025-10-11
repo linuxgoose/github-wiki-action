@@ -1,4 +1,4 @@
-#!/usr/bin/env -S deno run -Aq
+#!/usr/bin/env -S deno run -A
 // Copyright 2023 Jacob Hummer
 // SPDX-License-Identifier: Apache-2.0
 import process from "node:process";
