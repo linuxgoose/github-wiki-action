@@ -16,7 +16,7 @@ import { temporaryDirectory } from "npm:tempy@^3.1.0";
 import { $ } from "npm:zx@^7.2.2";
 import { remark } from "npm:remark@^14.0.3";
 import { visit } from "npm:unist-util-visit@^5.0.0";
-import { resolve } from "node:path";
+import { basename, resolve } from "node:path";
 
 core.startGroup("process.env");
 console.table(process.env);
@@ -52,7 +52,15 @@ await $`git config --global user.name github-actions[bot]`;
 await $`git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com`;
 
 await appendFile(".git/info/exclude", core.getInput("ignore"));
-await copy(resolve(workspacePath, core.getInput("path")), process.cwd());
+await copy(
+  resolve(workspacePath, core.getInput("path")),
+  process.cwd(),
+  {
+    filter: (src) => {
+      return basename(src) !== ".git";
+    }
+  },
+);
 
 if (core.getBooleanInput("preprocess")) {
   // https://github.com/nodejs/node/issues/39960
